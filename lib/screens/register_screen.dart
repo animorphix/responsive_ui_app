@@ -12,7 +12,8 @@ class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   bool isLoading = false;
 
   Future<void> _register() async {
@@ -31,10 +32,13 @@ class _RegisterPageState extends State<RegisterPage> {
       });
 
       if (registeredPassword != null) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Username is already taken')));
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Username is already taken')));
       } else {
-        await prefs.setString(_usernameController.text, _passwordController.text);
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Registration Successful')));
+        await prefs.setString(
+            _usernameController.text, _passwordController.text);
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Registration Successful')));
         Navigator.pop(context);
       }
     }
@@ -55,8 +59,9 @@ class _RegisterPageState extends State<RegisterPage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextFormField(
-                  focusNode: FocusNode(),
-                  onTapOutside:        (event) {       FocusScope.of(context).unfocus();},
+                  onTapOutside: (event) {
+                    FocusScope.of(context).unfocus();
+                  },
                   controller: _usernameController,
                   decoration: const InputDecoration(labelText: 'Username'),
                   validator: (value) {
@@ -70,6 +75,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   },
                 ),
                 TextFormField(
+                  onTapOutside: (event) {
+                    FocusScope.of(context).unfocus();
+                  },
                   controller: _passwordController,
                   decoration: const InputDecoration(labelText: 'Password'),
                   obscureText: true,
@@ -85,7 +93,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 TextFormField(
                   controller: _confirmPasswordController,
-                  decoration: const InputDecoration(labelText: 'Confirm Password'),
+                  decoration:
+                      const InputDecoration(labelText: 'Confirm Password'),
                   obscureText: true,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -105,7 +114,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     //style: ElevatedButton.styleFrom(foregroundColor: Colors.grey[800]),
                     onPressed: _register,
                     child: const Text('Register'),
-                    
                   ),
                 TextButton(
                   onPressed: () {

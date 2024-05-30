@@ -16,19 +16,17 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
   bool isLoading = false;
   late SharedPreferences prefs;
-  final _focusNode = FocusNode();
 
   @override
   void initState() {
     _loadPreferences();
     super.initState();
-    
   }
 
-    void _loadPreferences() async {
-     prefs = await SharedPreferences.getInstance();
-
+  void _loadPreferences() async {
+    prefs = await SharedPreferences.getInstance();
   }
+
   Future<void> _login() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
@@ -44,9 +42,11 @@ class _LoginPageState extends State<LoginPage> {
       });
 
       if (registeredPassword == null) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('User not registered')));
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text('User not registered')));
       } else if (registeredPassword != _passwordController.text) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Invalid password')));
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text('Invalid password')));
       } else {
         Navigator.pushReplacement(
           context,
@@ -72,7 +72,9 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 TextFormField(
                   controller: _usernameController,
-                  onTapOutside:        (event) {       FocusScope.of(context).unfocus();},
+                  onTapOutside: (event) {
+                    FocusScope.of(context).unfocus();
+                  },
                   decoration: const InputDecoration(labelText: 'Username'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -88,7 +90,9 @@ class _LoginPageState extends State<LoginPage> {
                   controller: _passwordController,
                   decoration: const InputDecoration(labelText: 'Password'),
                   obscureText: true,
-                  onTapOutside:        (event) {       FocusScope.of(context).unfocus();},
+                  onTapOutside: (event) {
+                    FocusScope.of(context).unfocus();
+                  },
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your password';
@@ -111,7 +115,8 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const RegisterPage()),
+                      MaterialPageRoute(
+                          builder: (context) => const RegisterPage()),
                     );
                   },
                   child: const Text('Don\'t have an account? Register'),
