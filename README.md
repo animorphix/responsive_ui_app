@@ -1,4 +1,4 @@
-# A responsive ui user interface
+# A responsive UI in flutter
 
 A simple Flutter project with log in/register pages and home page. Uses shared preferences to manage local data
 
